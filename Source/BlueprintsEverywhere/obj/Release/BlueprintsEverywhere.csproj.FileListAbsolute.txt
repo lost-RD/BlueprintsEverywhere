@@ -1,0 +1,3 @@
+C:\Program Files (x86)\RimWorld1135Win\Mods\BlueprintsEverywhere\Assemblies\BlueprintsEverywhere.dll
+C:\Program Files (x86)\RimWorld1135Win\Mods\BlueprintsEverywhere\Source\BlueprintsEverywhere\obj\Release\BlueprintsEverywhere.csprojResolveAssemblyReference.cache
+C:\Program Files (x86)\RimWorld1135Win\Mods\BlueprintsEverywhere\Source\BlueprintsEverywhere\obj\Release\BlueprintsEverywhere.dll

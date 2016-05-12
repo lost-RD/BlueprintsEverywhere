@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+
+    <name>Blueprints Everywhere v0.1</name>
+
+    <author>Lost_RD</author>
+
+    <url>localhost</url>
+
+    <targetVersion>RimWorld Alpha 13</targetVersion>
+
+    <description>Allows blueprints to be designated everywhere. Probably ruins everything. Requires CCL.</description>
+
+</ModMetaData>
