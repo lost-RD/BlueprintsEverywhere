@@ -66,10 +66,6 @@ namespace BlueprintsEverywhere.Detour
             {
                 return false;
             }
-			
-			return true;
-			
-			/*
 
             if(
                 ( oldDef.category != ThingCategory.Building )&&
@@ -122,7 +118,9 @@ namespace BlueprintsEverywhere.Detour
                     return true;
                 }
             }
-
+            
+            Log.Message("[BlueprintsEverywhere] Tried to place blueprint of " + newDef.ToString() + " onto " + oldDef.ToString() );
+            
             return
                 (
                     ( newDef is TerrainDef )&&
@@ -132,9 +130,65 @@ namespace BlueprintsEverywhere.Detour
                 (
                     ( buildableDef is TerrainDef )&&
                     ( !( newDef is TerrainDef ) )
-                );
-				*/
+                )||
+            	(
+            		( newDef == ThingDefOf.Wall) &&
+            		(
+            			( oldDef == ThingDefOf.Sandstone )||
+						( oldDef == ThingDefOf.Steel )||
+						( oldDef == ThingDefOf.Plasteel )||
+						( oldDef.ToString() == "MineableComponents" )||
+						( oldDef == ThingDefOf.Silver )||
+						( oldDef == ThingDefOf.Gold )
+					)
+				);
         }
+        
+        internal static bool _BlocksFramePlacement(Blueprint blue, Thing t)
+		{
+			if (t.def.category == ThingCategory.Plant) {
+        		//Log.Message("[BlueprintsEverywhere] if (t.def.category == ThingCategory.Plant)");
+				return t.def.plant.harvestWork > 200f;
+			}
+			if (blue.def.entityDefToBuild is TerrainDef || blue.def.entityDefToBuild.passability == Traversability.Standable) {
+        		//Log.Message("[BlueprintsEverywhere] (blue.def.entityDefToBuild is TerrainDef || blue.def.entityDefToBuild.passability == Traversability.Standable)");
+				return false;
+			}
+			if (blue.def.entityDefToBuild == ThingDefOf.GeothermalGenerator && t.def == ThingDefOf.SteamGeyser) {
+        		//Log.Message("[BlueprintsEverywhere] (blue.def.entityDefToBuild == ThingDefOf.GeothermalGenerator && t.def == ThingDefOf.SteamGeyser)");
+				return false;
+			}
+			ThingDef thingDef = blue.def.entityDefToBuild as ThingDef;
+			if (thingDef != null) {
+        		//Log.Message("[BlueprintsEverywhere] (thingDef != null)");
+				if (thingDef.EverTransmitsPower && t.def == ThingDefOf.PowerConduit && thingDef != ThingDefOf.PowerConduit) {
+        		//Log.Message("[BlueprintsEverywhere] (thingDef.EverTransmitsPower && t.def == ThingDefOf.PowerConduit && thingDef != ThingDefOf.PowerConduit)");
+					return false;
+				}
+				if (t.def == ThingDefOf.Wall && thingDef.building != null && thingDef.building.canPlaceOverWall) {
+        		//Log.Message("[BlueprintsEverywhere] (t.def == ThingDefOf.Wall && thingDef.building != null && thingDef.building.canPlaceOverWall)");
+					return false;
+				}
+			}
+			bool retval1 = t.def.IsEdifice();
+			bool retval2 = thingDef.IsEdifice();
+			bool retval3 = t.def.category == ThingCategory.Pawn;
+			bool retval4 = t.def.category == ThingCategory.Item;
+			bool retval5 = blue.def.entityDefToBuild.passability == Traversability.Impassable;
+			bool retval6 = t.def.Fillage >= FillCategory.Partial;
+			bool retval7 = thingDef.Fillage >= FillCategory.Partial;
+			
+			Log.Message("[BlueprintsEverywhere] _BlocksFramePlacement: "+ ((t.def.IsEdifice() && thingDef.IsEdifice()) || (t.def.category == ThingCategory.Pawn || (t.def.category == ThingCategory.Item && blue.def.entityDefToBuild.passability == Traversability.Impassable)) || (t.def.Fillage >= FillCategory.Partial && thingDef != null && thingDef.Fillage >= FillCategory.Partial)) + " Blueprint: "+blue.ToString()+", Thing: "+t.ToString()+", t.def.Fillage >= FillCategory.Partial == "+ retval6 + ", t.def.Fillage: " + t.def.Fillage.ToString()+ ", t.def.fillPercent: " + t.def.fillPercent );
+			
+			return false;
+			// this could do all sorts of damage
+			// so far I've had a prisoner wander into a wall as it was being built
+			// he was Han Solo'd, RIP
+			// the problem here should be solved by making RockBase resolve to FillCategory.Partial
+			// should be done easily in an XML file
+			
+			return (t.def.IsEdifice() && thingDef.IsEdifice()) || (t.def.category == ThingCategory.Pawn || (t.def.category == ThingCategory.Item && blue.def.entityDefToBuild.passability == Traversability.Impassable)) || (t.def.Fillage >= FillCategory.Partial && thingDef != null && thingDef.Fillage >= FillCategory.Partial);
+		}
 
     }
 

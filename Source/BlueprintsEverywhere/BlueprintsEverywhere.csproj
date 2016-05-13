@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DetourInjector.cs" />
+    <Compile Include="Detours\GenConstruct.cs" />
     <Compile Include="Detours\GenSpawn.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
