@@ -134,12 +134,19 @@ namespace BlueprintsEverywhere.Detour
             	(
             		( newDef == ThingDefOf.Wall) &&
             		(
-            			( oldDef == ThingDefOf.Sandstone )||
-						( oldDef == ThingDefOf.Steel )||
-						( oldDef == ThingDefOf.Plasteel )||
-						( oldDef.ToString() == "MineableComponents" )||
-						( oldDef == ThingDefOf.Silver )||
-						( oldDef == ThingDefOf.Gold )
+            			( oldDef.ToString() == "CollapsedRocks" )||
+            			( oldDef.ToString() == "Sandstone" )||
+            			( oldDef.ToString() == "Slate" )||
+            			( oldDef.ToString() == "Marble" )||
+            			( oldDef.ToString() == "Granite" )||
+            			( oldDef.ToString() == "Limestone" )||
+            			( oldDef.ToString() == "MineableSteel" )||
+            			( oldDef.ToString() == "MineableSilver" )||
+            			( oldDef.ToString() == "MineableGold" )||
+            			( oldDef.ToString() == "MineableUranium" )||
+            			( oldDef.ToString() == "MineablePlasteel" )||
+            			( oldDef.ToString() == "MineableJade" )||
+						( oldDef.ToString() == "MineableComponents" )
 					)
 				);
         }
