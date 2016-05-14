@@ -153,6 +153,10 @@ namespace BlueprintsEverywhere.Detour
         
         internal static bool _BlocksFramePlacement(Blueprint blue, Thing t)
 		{
+        	if (blue == t)
+        	{
+        		return false;
+        	}
 			if (t.def.category == ThingCategory.Plant) {
         		//Log.Message("[BlueprintsEverywhere] if (t.def.category == ThingCategory.Plant)");
 				return t.def.plant.harvestWork > 200f;
@@ -185,16 +189,42 @@ namespace BlueprintsEverywhere.Detour
 			bool retval6 = t.def.Fillage >= FillCategory.Partial;
 			bool retval7 = thingDef.Fillage >= FillCategory.Partial;
 			
-			Log.Message("[BlueprintsEverywhere] _BlocksFramePlacement: "+ ((t.def.IsEdifice() && thingDef.IsEdifice()) || (t.def.category == ThingCategory.Pawn || (t.def.category == ThingCategory.Item && blue.def.entityDefToBuild.passability == Traversability.Impassable)) || (t.def.Fillage >= FillCategory.Partial && thingDef != null && thingDef.Fillage >= FillCategory.Partial)) + " Blueprint: "+blue.ToString()+", Thing: "+t.ToString()+", t.def.Fillage >= FillCategory.Partial == "+ retval6 + ", t.def.Fillage: " + t.def.Fillage.ToString()+ ", t.def.fillPercent: " + t.def.fillPercent );
-			
-			return false;
-			// this could do all sorts of damage
 			// so far I've had a prisoner wander into a wall as it was being built
 			// he was Han Solo'd, RIP
-			// the problem here should be solved by making RockBase resolve to FillCategory.Partial
-			// should be done easily in an XML file
 			
-			return (t.def.IsEdifice() && thingDef.IsEdifice()) || (t.def.category == ThingCategory.Pawn || (t.def.category == ThingCategory.Item && blue.def.entityDefToBuild.passability == Traversability.Impassable)) || (t.def.Fillage >= FillCategory.Partial && thingDef != null && thingDef.Fillage >= FillCategory.Partial);
+			bool retbool =  (t.def.IsEdifice() && thingDef.IsEdifice()) || (t.def.category == ThingCategory.Pawn || (t.def.category == ThingCategory.Item && blue.def.entityDefToBuild.passability == Traversability.Impassable)) || (t.def.Fillage >= FillCategory.Partial && thingDef != null && thingDef.Fillage >= FillCategory.Partial);
+			retbool = (retval1 && retval2) || (retval3 || (retval4 && retval5 )) || (retval6 && thingDef != null && retval7);
+			
+			//Log.Message("[BlueprintsEverywhere] _BlocksFramePlacement: "+t.ToString()+ (retbool ? " blocks" : " doesn't block") +" placement of "+blue.ToString());
+			
+			// above was the original code from Tynan, below will override it if the blueprint is a wall and the thing is rock
+			
+			string bluedef = blue.def.ToString();
+			string tdef = t.def.ToString();
+			
+			if (bluedef == "Wall_Blueprint" &&
+				(
+            		( tdef == "CollapsedRocks" )||
+            		( tdef == "Sandstone" )||
+            		( tdef == "Slate" )||
+            		( tdef == "Marble" )||
+            		( tdef == "Granite" )||
+            		( tdef == "Limestone" )||
+            		( tdef == "MineableSteel" )||
+            		( tdef == "MineableSilver" )||
+            		( tdef == "MineableGold" )||
+            		( tdef == "MineableUranium" )||
+            		( tdef == "MineablePlasteel" )||
+            		( tdef == "MineableJade" )||
+					( tdef == "MineableComponents" )
+				)
+			)
+			{
+				//Log.Message("[BlueprintsEverywhere] Just building a wall on stone, don't mind me, nothing to see here...");
+				retbool = false;
+			}
+			
+			return retbool;
 		}
 
     }

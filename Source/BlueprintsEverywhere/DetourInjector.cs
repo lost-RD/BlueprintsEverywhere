@@ -44,21 +44,18 @@ namespace BlueprintsEverywhere
 			{
                 return false;
 			}
-            /*
-             * Commented out because errors
-             * 
-             * 
+
             // Detour RimWorld.WorkGiver_ConstructDeliverResourcesToBlueprints.JobOnThing
-            MethodInfo RimWorld_WorkGiver_ConstructDeliverResourcesToBlueprints_JobOnThing = typeof( WorkGiver_ConstructDeliverResourcesToBlueprints ).GetMethod( "JobOnThing", BindingFlags.Static | BindingFlags.Public );
-            MethodInfo BE_WorkGiver_ConstructDeliverResourcesToBlueprints_JobOnThing = typeof( Detour._WorkGiver_ConstructDeliverResourcesToBlueprints ).GetMethod( "_JobOnThing", BindingFlags.Static | BindingFlags.NonPublic );
+            MethodInfo RimWorld_WorkGiver_ConstructDeliverResourcesToBlueprints_JobOnThing = typeof( WorkGiver_ConstructDeliverResourcesToBlueprints ).GetMethod( "JobOnThing", BindingFlags.Instance | BindingFlags.Public );
+            MethodInfo BE_WorkGiver_ConstructDeliverResourcesToBlueprints_JobOnThing = typeof( Detour._WorkGiver_ConstructDeliverResourcesToBlueprints ).GetMethod( "JobOnThing", BindingFlags.Instance | BindingFlags.Public );
             if( !Detours.TryDetourFromTo( RimWorld_WorkGiver_ConstructDeliverResourcesToBlueprints_JobOnThing, BE_WorkGiver_ConstructDeliverResourcesToBlueprints_JobOnThing ) )
 			{
                 return false;
 			}
-            
+            /*
             // Detour RimWorld.WorkGiver_ConstructDeliverResourcesToBlueprints.DeconstructExistingEdificeJob
-            MethodInfo RimWorld_WorkGiver_ConstructDeliverResourcesToBlueprints_DeconstructExistingEdificeJob = typeof( WorkGiver_ConstructDeliverResourcesToBlueprints ).GetMethod( "DeconstructExistingEdificeJob", BindingFlags.Static | BindingFlags.Public );
-            MethodInfo BE_WorkGiver_ConstructDeliverResourcesToBlueprints_DeconstructExistingEdificeJob = typeof( Detour._WorkGiver_ConstructDeliverResourcesToBlueprints ).GetMethod( "_DeconstructExistingEdificeJob", BindingFlags.Static | BindingFlags.NonPublic );
+            MethodInfo RimWorld_WorkGiver_ConstructDeliverResourcesToBlueprints_DeconstructExistingEdificeJob = typeof( WorkGiver_ConstructDeliverResourcesToBlueprints ).GetMethod( "DeconstructExistingEdificeJob", BindingFlags.Public );
+            MethodInfo BE_WorkGiver_ConstructDeliverResourcesToBlueprints_DeconstructExistingEdificeJob = typeof( Detour._WorkGiver_ConstructDeliverResourcesToBlueprints ).GetMethod( "_DeconstructExistingEdificeJob", BindingFlags.NonPublic );
             if( !Detours.TryDetourFromTo( RimWorld_WorkGiver_ConstructDeliverResourcesToBlueprints_DeconstructExistingEdificeJob, BE_WorkGiver_ConstructDeliverResourcesToBlueprints_DeconstructExistingEdificeJob ) )
 			{
                 return false;
