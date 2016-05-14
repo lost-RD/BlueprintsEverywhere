@@ -106,7 +106,7 @@ namespace BlueprintsEverywhere.Detour
 			}
 			if (center.Fogged())
 			{
-				Log.Message( "[BlueprintsEverywhere] trying to place " + entDef.ToString() + " in fog");
+				//Log.Message( "[BlueprintsEverywhere] trying to place " + entDef.ToString() + " in fog");
 				if (!(entDef.ToString() == "Wall"))
 				{
 					return "CannotPlaceInUndiscovered".Translate();

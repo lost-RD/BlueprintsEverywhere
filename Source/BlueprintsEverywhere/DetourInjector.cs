@@ -13,6 +13,7 @@ namespace BlueprintsEverywhere
 
         public override bool Inject()
         {
+        	
             // Detour Verse.GenSpawn.CanPlaceBlueprintOver
             MethodInfo Verse_GenSpawn_CanPlaceBlueprintOver = typeof( GenSpawn ).GetMethod( "CanPlaceBlueprintOver", BindingFlags.Static | BindingFlags.Public );
             MethodInfo BE_GenSpawn_CanPlaceBlueprintOver = typeof( Detour._GenSpawn ).GetMethod( "_CanPlaceBlueprintOver", BindingFlags.Static | BindingFlags.NonPublic );
@@ -52,15 +53,9 @@ namespace BlueprintsEverywhere
 			{
                 return false;
 			}
-            /*
-            // Detour RimWorld.WorkGiver_ConstructDeliverResourcesToBlueprints.DeconstructExistingEdificeJob
-            MethodInfo RimWorld_WorkGiver_ConstructDeliverResourcesToBlueprints_DeconstructExistingEdificeJob = typeof( WorkGiver_ConstructDeliverResourcesToBlueprints ).GetMethod( "DeconstructExistingEdificeJob", BindingFlags.Public );
-            MethodInfo BE_WorkGiver_ConstructDeliverResourcesToBlueprints_DeconstructExistingEdificeJob = typeof( Detour._WorkGiver_ConstructDeliverResourcesToBlueprints ).GetMethod( "_DeconstructExistingEdificeJob", BindingFlags.NonPublic );
-            if( !Detours.TryDetourFromTo( RimWorld_WorkGiver_ConstructDeliverResourcesToBlueprints_DeconstructExistingEdificeJob, BE_WorkGiver_ConstructDeliverResourcesToBlueprints_DeconstructExistingEdificeJob ) )
-			{
-                return false;
-			}
-            */
+            
+            Log.Message("[BlueprintsEverywhere] Loaded all detours :D");
+
             return true;
 		}
 	}

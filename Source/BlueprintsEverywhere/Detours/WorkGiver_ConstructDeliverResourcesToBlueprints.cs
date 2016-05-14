@@ -10,7 +10,7 @@ namespace BlueprintsEverywhere.Detour
 	{
 		public override Job JobOnThing(Pawn pawn, Thing t)
 		{
-			Log.Message("[BlueprintsEverywhere] JobOnThing: pawn: " + pawn.ToString() + ", thing: " + t.ToString());
+			//Log.Message("[BlueprintsEverywhere] JobOnThing: pawn: " + pawn.ToString() + ", thing: " + t.ToString());
 			if (t.Faction != pawn.Faction) {
 				return null;
 			}
@@ -77,7 +77,7 @@ namespace BlueprintsEverywhere.Detour
 					thing = c.GetEdifice();
 					if (thing != null)
 					{
-						Log.Message("[BlueprintsEverywhere] DeconstructExistingEdificeJob: Pawn: " + pawn.ToString() + ", Thing: " + thing.ToString() + ", Blueprint: " + blue.ToString());
+						//Log.Message("[BlueprintsEverywhere] DeconstructExistingEdificeJob: Pawn: " + pawn.ToString() + ", Thing: " + thing.ToString() + ", Blueprint: " + blue.ToString());
 						ThingDef thingDef = blue.def.entityDefToBuild as ThingDef;
 						if (thingDef != null && thingDef.building.canPlaceOverWall && thing.def == ThingDefOf.Wall)
 						{
@@ -121,7 +121,7 @@ namespace BlueprintsEverywhere.Detour
 				)
 			)
 			{
-				Log.Message("[BlueprintsEverywhere] DeconstructExistingEdificeJob: blue.def is Wall_Blueprint and thing.def is stone, returning null");
+				//Log.Message("[BlueprintsEverywhere] DeconstructExistingEdificeJob: blue.def is Wall_Blueprint and thing.def is stone, returning null");
 				return null;
 			}
 			
