@@ -5,10 +5,10 @@
 
     <author>Lost_RD</author>
 
-    <url>localhost</url>
+    <url>https://ludeon.com/forums/index.php?topic=20177.0</url>
 
     <targetVersion>RimWorld Alpha 13</targetVersion>
 
-    <description>Allows blueprints to be designated everywhere. Probably ruins everything. Requires CCL.</description>
+    <description>Allows wall blueprints to be designated on stone and ores. Be careful when using on prison walls. Requires CCL.</description>
 
 </ModMetaData>
